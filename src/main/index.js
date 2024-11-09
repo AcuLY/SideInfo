@@ -5,6 +5,17 @@ import icon from '../../resources/icon.png?asset'
 
 const { screen } = require('electron')
 
+async function fetchBangumiCalendar() {
+  const calendarResponse = await fetch('https://api.bgm.tv/calendar')
+  const collectionResponse = await fetch('https://api.bgm.tv/v0/users/lucay126/collections?subject_type=2&type=3&limit=30&offset=0')
+  const [calendarData, collectionData] = await Promise.all([
+    (await calendarResponse).json(),
+    (await collectionResponse).json()
+  ])
+
+  return [calendarData, collectionData]
+}
+
 function createWindow() {
   // 选择显示器
   const displays = screen.getAllDisplays()
@@ -46,6 +57,10 @@ function createWindow() {
   }
 
   mainWindow.webContents.openDevTools({ mode: 'detach' })
+
+  ipcMain.handle('fetchBangumiCalendar', async () => {
+    return await fetchBangumiCalendar()
+  })
 }
 
 // This method will be called when Electron has finished

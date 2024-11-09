@@ -52,7 +52,7 @@ setInterval(() => {
     padding: 10px 30px 10px 30px;
     user-select: none;
     color: white;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.774);
+    text-shadow: 0 0 10px rgb(0, 0, 0);
 }
 
 .time-wrapper {
