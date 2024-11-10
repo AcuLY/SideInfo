@@ -1,7 +1,7 @@
 <template>
   <div id="wrapper">
     <div style="position: absolute; width: 100vw; height: 100vh; overflow: hidden;">
-      <img src="./assets/IMG_7982.JPG" alt="" style="position: absolute; width: 100vw; -webkit-user-drag: none; transform: translateY(-180px);">
+      <img src="./assets/未标题-4.png" alt="" style="position: absolute; -webkit-user-drag: none;">
     </div>
     
     <Weather style="z-index: 1;"/>

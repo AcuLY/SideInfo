@@ -6,7 +6,7 @@
         </div>
         <div class="current-container">
             <div id="current-temperature">{{ currentTemperature }}</div>
-            <img :src="`./src/assets/weather-icon/${currentWeather}.png`" alt="">
+            <img :src="`./src/assets/weather-icon/${currentWeather}.png`" alt="" id="weather-icon">
         </div>
         <div class="forecast-container">
             <div class="forecast" v-for="(item, index) in weatherForecast" :key="index">
@@ -94,6 +94,10 @@ onMounted(() => {
 
 #current-weather {
     font-size: 60px;
+}
+
+#weather-icon {
+    filter: drop-shadow(0px 0px 5px rgb(0, 0, 0));
 }
 
 .forecast-container {
