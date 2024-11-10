@@ -39,6 +39,14 @@ const getBangumiCalendar = async () => {
     }
 }
 
+setInterval(() => {
+    const now = new Date();
+    const hours = now.getHours();
+    if (hours === 0) {
+        getBangumiCalendar();
+    }
+}, 1800000);
+
 onMounted(() => {
     getBangumiCalendar();
 })
@@ -55,7 +63,7 @@ onMounted(() => {
     font-family: STZhongsong;
     font-weight: 600;
     box-sizing: border-box;
-    padding: 30px 30px 0px 30px;
+    padding: 30px 30px 0px 0px;
     user-select: none;
     color: white;
 }
@@ -63,17 +71,18 @@ onMounted(() => {
 .title {
     font-size: 60px;
     text-shadow: 0 0 10px rgba(0, 0, 0, 0.812);
+    font-weight: 500;
 }
 
 .divider {
     height: 1px;
-    width: 26vw;
+    width: 24vw;
     background-color: white;
     margin: 10px 0px 10px 0px;
 }
 
 .anime-container {
-    width: 26vw;
+    width: 24vw;
     height: 64vh;
     overflow: hidden;
     white-space: nowrap;
@@ -86,7 +95,7 @@ onMounted(() => {
 }
 
 .anime-list li {
-    width: 26vw;
+    width: 24vw;
     padding-left: 3px;
     margin-bottom: 5px;
     overflow: hidden;

@@ -3,7 +3,8 @@ import { electronAPI } from '@electron-toolkit/preload'
 
 // Custom APIs for renderer
 const api = {
-  fetchBangumiCalendar: () => ipcRenderer.invoke('fetchBangumiCalendar')
+  fetchBangumiCalendar: () => ipcRenderer.invoke('fetchBangumiCalendar'),
+  fetchWeatherForecast: () => ipcRenderer.invoke('fetchWeatherForecast')
 }
 
 // Use `contextBridge` APIs to expose Electron APIs to

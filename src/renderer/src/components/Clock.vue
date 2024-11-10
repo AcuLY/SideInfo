@@ -24,7 +24,7 @@ const currentDate = computed(() => {
 
 const currentDay = computed(() => {
     const dayIndex = time.value.getDay();
-    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const days = ['日曜日', '月曜日', '火曜日', '水曜日', '木曜日', '金曜日', '土曜日'];
     return days[dayIndex];
 })
 
@@ -65,19 +65,20 @@ setInterval(() => {
 .date-wrapper {
     display: flex;
     justify-content: space-between;
-    padding: 0px 10px 0px 10px;
+    padding: 0px 30px 0px 30px;
 }
 
 #time {
-    font-size: 240px;
+    font-size: 220px;
     transform: scaleY(1.35);
 }
 
 #date {
-    font-size: 80px;
+    font-size: 90px;
 }
 
 #day {
-    font-size: 80px;
+    font-family: STZhongsong;
+    font-size: 70px;
 }
 </style>

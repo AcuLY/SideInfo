@@ -16,6 +16,14 @@ async function fetchBangumiCalendar() {
   return [calendarData, collectionData]
 }
 
+async function fetchWeatherForecast() {
+  const apiKey = '9bdf74f35fe04a18bc082956240911'
+  const url = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=31.355,120.384&days=3`
+  const response = await fetch(url)
+  const data = await response.json()
+  return data
+}
+
 function createWindow() {
   // 选择显示器
   const displays = screen.getAllDisplays()
@@ -60,6 +68,10 @@ function createWindow() {
 
   ipcMain.handle('fetchBangumiCalendar', async () => {
     return await fetchBangumiCalendar()
+  })
+
+  ipcMain.handle('fetchWeatherForecast', async () => {
+    return await fetchWeatherForecast()
   })
 }
 
