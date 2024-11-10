@@ -6,7 +6,7 @@
         </div>
         <div class="current-container">
             <div id="current-temperature">{{ currentTemperature }}</div>
-            <img :src="`./src/assets/weather-icon/${currentWeather}.png`" alt="" id="weather-icon">
+            <img :src="icon" alt="" id="weather-icon">
         </div>
         <div class="forecast-container">
             <div class="forecast" v-for="(item, index) in weatherForecast" :key="index">
@@ -22,8 +22,28 @@
 import { ref, onMounted } from 'vue';
 import { weather_dict, icon_dict } from '../weather_dict';
 
+import Blizzard2 from '../assets/weather-icon/Blizzard2.png'
+import ClearNight from '../assets/weather-icon/ClearNight.png'
+import Dust from '../assets/weather-icon/Dust.png'
+import Fog from '../assets/weather-icon/Fog.png'
+import HeavyRain from '../assets/weather-icon/HeavyRain.png'
+import HeavySnow2 from '../assets/weather-icon/HeavySnow2.png'
+import LightRain from '../assets/weather-icon/LightRain.png'
+import LightSnow2 from '../assets/weather-icon/LightSnow2.png'
+import LOCATION from '../assets/weather-icon/LOCATION.png'
+import ModerateRain from '../assets/weather-icon/ModerateRain.png'
+import ModerateSnow2 from '../assets/weather-icon/ModerateSnow2.png'
+import Overcast from '../assets/weather-icon/Overcast.png'
+import ShowerRain2 from '../assets/weather-icon/ShowerRain2.png'
+import Sleet2 from '../assets/weather-icon/Sleet2.png'
+import SnowShower2 from '../assets/weather-icon/SnowShower2.png'
+import Sunny from '../assets/weather-icon/Sunny.png'
+import ThunderyRain from '../assets/weather-icon/ThunderyRain.png'
+import TorrentialRain from '../assets/weather-icon/TorrentialRain.png'
+
 const currentTemperature = ref(0);
 const currentWeather = ref('');
+const icon = ref(null);
 
 const weatherForecast = ref([]);
 
@@ -32,6 +52,25 @@ const getWeather = async () => {
 
     currentTemperature.value = `${data.current.temp_c.toFixed(0)}°`;
     currentWeather.value = icon_dict[data.current.condition.text];
+    
+    if (currentWeather.value === 'Blizzard2') icon.value = Blizzard2;
+    else if (currentWeather.value === 'ClearNight') icon.value = ClearNight;
+    else if (currentWeather.value === 'Dust') icon.value = Dust;
+    else if (currentWeather.value === 'Fog') icon.value = Fog;
+    else if (currentWeather.value === 'HeavyRain') icon.value = HeavyRain;
+    else if (currentWeather.value === 'HeavySnow2') icon.value = HeavySnow2;
+    else if (currentWeather.value === 'LightRain') icon.value = LightRain;
+    else if (currentWeather.value === 'LightSnow2') icon.value = LightSnow2;
+    else if (currentWeather.value === 'LOCATION') icon.value = LOCATION;
+    else if (currentWeather.value === 'ModerateRain') icon.value = ModerateRain;
+    else if (currentWeather.value === 'ModerateSnow2') icon.value = ModerateSnow2;
+    else if (currentWeather.value === 'Overcast') icon.value = Overcast;
+    else if (currentWeather.value === 'ShowerRain2') icon.value = ShowerRain2;
+    else if (currentWeather.value === 'Sleet2') icon.value = Sleet2;
+    else if (currentWeather.value === 'SnowShower2') icon.value = SnowShower2;
+    else if (currentWeather.value === 'Sunny') icon.value = Sunny;
+    else if (currentWeather.value === 'ThunderyRain') icon.value = ThunderyRain;
+    else if (currentWeather.value === 'TorrentialRain') icon.value = TorrentialRain;
 
     const dayIndex = new Date().getDay();
     const days = ['日', '月', '火', '水', '木', '金', '土'];

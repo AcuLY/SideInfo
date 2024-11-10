@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "An Electron application with Vue",
   "main": "./out/main/index.js",
-  "author": "example.com",
+  "author": "luca.com",
   "homepage": "https://electron-vite.org",
   "scripts": {
     "format": "prettier --write .",
@@ -19,8 +19,7 @@
   },
   "dependencies": {
     "@electron-toolkit/preload": "^3.0.1",
-    "@electron-toolkit/utils": "^3.0.0",
-    "sideinfo": "file:"
+    "@electron-toolkit/utils": "^3.0.0"
   },
   "devDependencies": {
     "@electron-toolkit/eslint-config": "^1.0.2",
@@ -35,5 +34,36 @@
     "prettier": "^3.3.2",
     "vite": "^5.3.1",
     "vue": "^3.4.30"
+  },
+  "build": {
+    "appId": "com.luca.sideinfo",  
+    "productName": "SideInfo",       
+    "copyright": "Copyright © luca.com",  
+    "directories": {
+      "output": "dist" 
+    },
+    "files": [
+      "**/*",
+      "out/**/*"
+    ],
+    "mac": {
+      "target": ["dmg", "zip"],
+      "icon": "assets/icons/mac/icon.icns"
+    },
+    "win": {
+      "target": "nsis", 
+      "icon": "assets/icons/win/icon.ico",
+      "publisherName": "luca.com"
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": "assets/icons/linux/icon.png",
+      "category": "Utility"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowElevation": true
+    }
   }
 }

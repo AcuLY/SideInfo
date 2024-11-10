@@ -49,7 +49,7 @@ setInterval(() => {
     flex-direction: column;
     font-family: Garamond;
     box-sizing: border-box;
-    padding: 10px 30px 10px 30px;
+    padding: 10px 30px 10px 20px;
     user-select: none;
     color: white;
     text-shadow: 0 0 10px rgb(0, 0, 0);

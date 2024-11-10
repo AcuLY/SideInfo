@@ -1,9 +1,10 @@
-import { app, shell, BrowserWindow, ipcMain, net } from 'electron'
+import { app, shell, BrowserWindow, ipcMain, Tray, Menu, nativeImage } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
-import icon from '../../resources/icon.png?asset'
 
+const path = require('path')
 const { screen } = require('electron')
+let tray = null
 
 async function fetchBangumiCalendar() {
   const calendarResponse = await fetch('https://api.bgm.tv/calendar')
@@ -40,12 +41,14 @@ function createWindow() {
     fullscreen: true,
     show: false,
     autoHideMenuBar: true,
+    skipTaskbar: true,
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
       sandbox: false
     }
   })
+
 
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()
@@ -64,7 +67,7 @@ function createWindow() {
     mainWindow.loadFile(join(__dirname, '../renderer/index.html'))
   }
 
-  mainWindow.webContents.openDevTools({ mode: 'detach' })
+  // mainWindow.webContents.openDevTools({ mode: 'detach' })
 
   ipcMain.handle('fetchBangumiCalendar', async () => {
     return await fetchBangumiCalendar()
@@ -73,6 +76,23 @@ function createWindow() {
   ipcMain.handle('fetchWeatherForecast', async () => {
     return await fetchWeatherForecast()
   })
+}
+
+function createTray() {
+  const iconPath = path.join(__dirname, 'tray-icon.png');
+  const tray = new Tray(nativeImage.createFromPath(iconPath));
+
+  const contextMenu = Menu.buildFromTemplate([
+    {
+      label: 'Quit',
+      click: () => {
+        app.quit()
+      },
+    },
+  ])
+
+  tray.setToolTip('SideView')
+  tray.setContextMenu(contextMenu)
 }
 
 // This method will be called when Electron has finished
@@ -93,6 +113,7 @@ app.whenReady().then(() => {
   ipcMain.on('ping', () => console.log('pong'))
 
   createWindow()
+  createTray()
 
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the
