@@ -6,6 +6,8 @@ const path = require('path')
 const { screen } = require('electron')
 let tray = null
 
+let displayNumber = 4;
+
 async function fetchBangumiCalendar() {
   const calendarResponse = await fetch('https://api.bgm.tv/calendar')
   const collectionResponse = await fetch('https://api.bgm.tv/v0/users/lucay126/collections?subject_type=2&type=3&limit=30&offset=0')
@@ -28,7 +30,7 @@ async function fetchWeatherForecast() {
 function createWindow() {
   // 选择显示器
   const displays = screen.getAllDisplays()
-  const selectedDisplay = displays[3]
+  const selectedDisplay = displays[displayNumber - 1]
   const { width, height } = selectedDisplay.bounds
   // Create the browser window.
   const mainWindow = new BrowserWindow({
@@ -79,10 +81,26 @@ function createWindow() {
 }
 
 function createTray() {
-  const iconPath = path.join(__dirname, 'tray-icon.png');
-  const tray = new Tray(nativeImage.createFromPath(iconPath));
+  const iconPath = path.join(__dirname, 'tray-icon.png')
+  tray = new Tray(nativeImage.createFromPath(iconPath))
+
+  // 获取所有显示器
+  const displays = screen.getAllDisplays()
+
+  // 创建显示器选择菜单
+  const displayMenu = displays.map((display, index) => ({
+    label: `Display ${index + 1}`,
+    type: 'radio',
+    checked: (displayNumber === index + 1),
+    click: () => {
+      displayNumber = index + 1
+      mainWindow.close()
+      createWindow() // 切换显示器后重新创建窗口
+    },
+  }))
 
   const contextMenu = Menu.buildFromTemplate([
+    ...displayMenu, // 显示器选择菜单
     {
       label: 'Quit',
       click: () => {

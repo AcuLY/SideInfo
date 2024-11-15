@@ -52,6 +52,7 @@ const getWeather = async () => {
 
     currentTemperature.value = `${data.current.temp_c.toFixed(0)}°`;
     currentWeather.value = icon_dict[data.current.condition.text];
+    console.log(data.current.condition.text)
     
     if (currentWeather.value === 'Blizzard2') icon.value = Blizzard2;
     else if (currentWeather.value === 'ClearNight') icon.value = ClearNight;
